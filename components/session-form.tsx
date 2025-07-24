@@ -95,23 +95,23 @@ export function SessionForm({ student, onSubmit, onClose }: SessionFormProps) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
       <Card className="w-full max-w-md">
-        <CardHeader className="flex flex-row items-center justify-between">
+        <CardHeader className="flex flex-row items-center justify-between bg-gradient-to-r from-blue-500 to-blue-700 text-white">
           <CardTitle className="flex items-center gap-2">
             <BookOpen className="w-5 h-5" />
             บันทึกการสอน
           </CardTitle>
-          <Button variant="ghost" size="sm" onClick={onClose}>
+          <Button variant="ghost" size="sm" onClick={onClose} className="hover:bg-blue-200 hover:text-blue-700">
             <X className="w-4 h-4" />
           </Button>
         </CardHeader>
 
         <CardContent>
           {/* Student Info */}
-          <div className="bg-gray-50 rounded-lg p-3 mb-4">
-            <p className="font-medium text-gray-900">{student.name}</p>
-            <p className="text-sm text-gray-600">{student.grade}</p>
+          <div className="bg-blue-100 rounded-lg p-3 mb-4 border border-blue-200">
+            <p className="font-medium text-blue-900">{student.name}</p>
+            <p className="text-sm text-blue-600">{student.grade}</p>
             <div className="flex items-center gap-4 mt-2 text-sm">
-              <span className="flex items-center gap-1">
+              <span className="flex items-center gap-1 text-blue-700">
                 <Clock className="w-4 h-4" />
                 เหลือ {student.remainingHours} ชั่วโมง
               </span>
@@ -126,7 +126,7 @@ export function SessionForm({ student, onSubmit, onClose }: SessionFormProps) {
                 type="date"
                 value={formData.date}
                 onChange={(e) => handleInputChange("date", e.target.value)}
-                className={errors.date ? "border-red-500" : ""}
+                className={`${errors.date ? "border-red-500" : "border-blue-300 focus:border-blue-500"} rounded-md shadow-sm`}
               />
               {errors.date && <p className="text-sm text-red-500 mt-1">{errors.date}</p>}
             </div>
@@ -138,7 +138,7 @@ export function SessionForm({ student, onSubmit, onClose }: SessionFormProps) {
                 value={formData.teacher}
                 onChange={(e) => handleInputChange("teacher", e.target.value)}
                 placeholder="ชื่อผู้สอน"
-                className={errors.teacher ? "border-red-500" : ""}
+                className={`${errors.teacher ? "border-red-500" : "border-blue-300 focus:border-blue-500"} rounded-md shadow-sm`}
               />
               {errors.teacher && <p className="text-sm text-red-500 mt-1">{errors.teacher}</p>}
             </div>
@@ -154,7 +154,7 @@ export function SessionForm({ student, onSubmit, onClose }: SessionFormProps) {
                 value={formData.hoursUsed}
                 onChange={(e) => handleInputChange("hoursUsed", Number.parseFloat(e.target.value) || 0)}
                 placeholder="จำนวนชั่วโมง"
-                className={errors.hoursUsed ? "border-red-500" : ""}
+                className={`${errors.hoursUsed ? "border-red-500" : "border-blue-300 focus:border-blue-500"} rounded-md shadow-sm`}
               />
               {errors.hoursUsed && <p className="text-sm text-red-500 mt-1">{errors.hoursUsed}</p>}
               <p className="text-xs text-gray-500 mt-1">สามารถใช้ได้สูงสุด {student.remainingHours} ชั่วโมง</p>
@@ -168,16 +168,21 @@ export function SessionForm({ student, onSubmit, onClose }: SessionFormProps) {
                 onChange={(e) => handleInputChange("content", e.target.value)}
                 placeholder="ระบุเนื้อหาที่สอนในครั้งนี้..."
                 rows={4}
-                className={errors.content ? "border-red-500" : ""}
+                className={`${errors.content ? "border-red-500" : "border-blue-300 focus:border-blue-500"} rounded-md shadow-sm`}
               />
               {errors.content && <p className="text-sm text-red-500 mt-1">{errors.content}</p>}
             </div>
 
             <div className="flex gap-3 pt-4">
-              <Button type="button" variant="outline" onClick={onClose} className="flex-1 bg-transparent">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={onClose}
+                className="flex-1 bg-transparent text-blue-700 border-blue-500 hover:bg-blue-500 hover:text-white"
+              >
                 ยกเลิก
               </Button>
-              <Button type="submit" className="flex-1">
+              <Button type="submit" className="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-medium rounded-md">
                 บันทึกการสอน
               </Button>
             </div>

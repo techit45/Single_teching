@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { X } from "lucide-react"
+import { BookOpen, UserRound, GraduationCap, Phone, Clock } from "lucide-react"
 
 interface Student {
   id: string
@@ -92,10 +93,12 @@ export function StudentForm({ student, onSubmit, onClose }: StudentFormProps) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <Card className="w-full max-w-md">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>{student ? "แก้ไขข้อมูลผู้เรียน" : "เพิ่มผู้เรียนใหม่"}</CardTitle>
-          <Button variant="ghost" size="sm" onClick={onClose}>
+      <Card className="w-full max-w-md shadow-lg rounded-lg border border-blue-200">
+        <CardHeader className="flex flex-row items-center justify-between bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-t-lg py-3 px-4">
+          <CardTitle className="text-lg font-semibold flex items-center gap-2">
+            {student ? "แก้ไขข้อมูลผู้เรียน" : "เพิ่มผู้เรียนใหม่"}
+          </CardTitle>
+          <Button variant="ghost" size="sm" onClick={onClose} className="hover:bg-blue-200 text-white">
             <X className="w-4 h-4" />
           </Button>
         </CardHeader>
@@ -103,43 +106,55 @@ export function StudentForm({ student, onSubmit, onClose }: StudentFormProps) {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <Label htmlFor="name">ชื่อ-นามสกุล *</Label>
+              <Label htmlFor="name" className="text-blue-700 font-medium flex items-center gap-1">
+                <UserRound className="w-4 h-4" />
+                ชื่อ-นามสกุล *
+              </Label>
               <Input
                 id="name"
                 value={formData.name}
                 onChange={(e) => handleInputChange("name", e.target.value)}
                 placeholder="กรอกชื่อ-นามสกุล"
-                className={errors.name ? "border-red-500" : ""}
+                className={`border-gray-300 focus:ring-blue-500 focus:border-blue-500 shadow-sm rounded-md ${errors.name ? "border-red-500" : ""}`}
               />
               {errors.name && <p className="text-sm text-red-500 mt-1">{errors.name}</p>}
             </div>
 
             <div>
-              <Label htmlFor="grade">ระดับชั้น *</Label>
+              <Label htmlFor="grade" className="text-blue-700 font-medium flex items-center gap-1">
+                <GraduationCap className="w-4 h-4" />
+                ระดับชั้น *
+              </Label>
               <Input
                 id="grade"
                 value={formData.grade}
                 onChange={(e) => handleInputChange("grade", e.target.value)}
                 placeholder="เช่น ม.6, ป.4"
-                className={errors.grade ? "border-red-500" : ""}
+                className={`border-gray-300 focus:ring-blue-500 focus:border-blue-500 shadow-sm rounded-md ${errors.grade ? "border-red-500" : ""}`}
               />
               {errors.grade && <p className="text-sm text-red-500 mt-1">{errors.grade}</p>}
             </div>
 
             <div>
-              <Label htmlFor="contact">ข้อมูลติดต่อ *</Label>
+              <Label htmlFor="contact" className="text-blue-700 font-medium flex items-center gap-1">
+                <Phone className="w-4 h-4" />
+                ข้อมูลติดต่อ *
+              </Label>
               <Input
                 id="contact"
                 value={formData.contact}
                 onChange={(e) => handleInputChange("contact", e.target.value)}
                 placeholder="เบอร์โทรศัพท์หรือ Line ID"
-                className={errors.contact ? "border-red-500" : ""}
+                className={`border-gray-300 focus:ring-blue-500 focus:border-blue-500 shadow-sm rounded-md ${errors.contact ? "border-red-500" : ""}`}
               />
               {errors.contact && <p className="text-sm text-red-500 mt-1">{errors.contact}</p>}
             </div>
 
             <div>
-              <Label htmlFor="courseType">ประเภทคอร์ส *</Label>
+              <Label htmlFor="courseType" className="text-blue-700 font-medium flex items-center gap-1">
+                <BookOpen className="w-4 h-4" />
+                ประเภทคอร์ส *
+              </Label>
               <select
                 id="courseType"
                 value={formData.courseType}
@@ -153,7 +168,10 @@ export function StudentForm({ student, onSubmit, onClose }: StudentFormProps) {
             </div>
 
             <div>
-              <Label htmlFor="totalHours">จำนวนชั่วโมงรวม *</Label>
+              <Label htmlFor="totalHours" className="text-blue-700 font-medium flex items-center gap-1">
+                <Clock className="w-4 h-4" />
+                จำนวนชั่วโมงรวม *
+              </Label>
               <Input
                 id="totalHours"
                 type="number"
@@ -162,16 +180,21 @@ export function StudentForm({ student, onSubmit, onClose }: StudentFormProps) {
                 value={formData.totalHours}
                 onChange={(e) => handleInputChange("totalHours", Number.parseFloat(e.target.value) || 0)}
                 placeholder="จำนวนชั่วโมงที่ซื้อ"
-                className={errors.totalHours ? "border-red-500" : ""}
+                className={`border-gray-300 focus:ring-blue-500 focus:border-blue-500 shadow-sm rounded-md ${errors.totalHours ? "border-red-500" : ""}`}
               />
               {errors.totalHours && <p className="text-sm text-red-500 mt-1">{errors.totalHours}</p>}
             </div>
 
             <div className="flex gap-3 pt-4">
-              <Button type="button" variant="outline" onClick={onClose} className="flex-1 bg-transparent">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={onClose}
+                className="flex-1 bg-transparent text-blue-700 border-blue-500 hover:bg-blue-50"
+              >
                 ยกเลิก
               </Button>
-              <Button type="submit" className="flex-1">
+              <Button type="submit" className="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-medium">
                 {student ? "บันทึกการแก้ไข" : "เพิ่มผู้เรียน"}
               </Button>
             </div>
